@@ -1,0 +1,25 @@
+.content{
+  margin-top: 50px;
+}
+
+.file_upload {
+  position: relative;
+  overflow: hidden;
+  display: inline-block;
+
+  input[type=file]{
+    font-size: 100px;
+    position: absolute;
+    left:0;
+    top:0;
+    opacity: 0;
+  }
+}
+
+table{
+  width: 100%;
+}
+
+h1{
+  margin: 30px 0px 0px 0px;
+}

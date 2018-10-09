@@ -1,0 +1,97 @@
+<div class="container content">
+  <div class="row">
+    <div class="col-12" [hidden]="!isFilesVisible">
+      <mat-list>
+        <h3 mat-subheader>Files</h3>
+        <mat-list-item *ngFor="let file of files">
+          <div class="container">
+            <div class="row">
+              <div class="col">{{file.name}}</div>
+              <app-size calass="col-4" [size]="file.size"></app-size>
+              <i class="col-1 fa fa-times fa-2x" aria-hidden="true" (click)="removeFromFiles(file)"></i>
+              <!-- <div class="col-4">{{file.size / 1024 / 1024 | number: '1.0-2'}} Mb</div> -->
+            </div>
+          </div>
+          <!-- <h4> {{file.name}} </h4> -->
+        </mat-list-item>
+      </mat-list>
+    </div>
+    <div class="col-2">
+      <div class="file_upload">
+        <form method="POST" enctype="multipart/form-data">
+          <button mat-raised-button color="primary">Choose Files...</button>
+          <input type="file" name="files" accept=".doc,.docx,.png,.jpeg,.jpg" (change)="onFilesSelected()"
+            multiple #filesInput>
+        </form>
+      </div>
+    </div>
+    <div class="col-2">
+      <button mat-raised-button [disabled]="!canUpload" color="accent" (click)="upload()">Upload</button>
+    </div>
+    <div class="col-12" [hidden]="!hasError">Please delete those files larger than 10 MB in size.</div>
+  </div>
+
+  <div class="row">
+    <h1>Images</h1>
+    <table mat-table [dataSource]="images" class="mat-elevation-z8 table">
+
+      <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="size">
+        <th mat-header-cell *matHeaderCellDef> Size </th>
+        <td mat-cell *matCellDef="let element">
+          <app-size [size]="element.size"></app-size>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+
+  <div class="row">
+    <h1>Documents</h1>
+    <table mat-table [dataSource]="documents" class="mat-elevation-z8">
+
+      <!--- Note that these columns can be defined in any order.
+                The actual rendered columns are set as a property on the row definition" -->
+
+      <!-- Position Column -->
+      <ng-container matColumnDef="id">
+        <th mat-header-cell *matHeaderCellDef> ID </th>
+        <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+      </ng-container>
+
+      <!-- Name Column -->
+      <ng-container matColumnDef="name">
+        <th mat-header-cell *matHeaderCellDef> Name </th>
+        <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+      </ng-container>
+
+      <!-- Weight Column -->
+      <ng-container matColumnDef="size">
+        <th mat-header-cell *matHeaderCellDef> Size </th>
+        <td mat-cell *matCellDef="let element">
+          <app-size [size]="element.size"></app-size>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+    </table>
+  </div>
+</div>
